@@ -10,33 +10,42 @@ import SwiftUI
 struct EditContact: View {
     @Environment(\.managedObjectContext) var managedObjContext
     @Environment(\.dismiss) var dismiss
-
+    
     var contact: FetchedResults<Contacts>.Element
-
+    
     @Binding var updatedFirstName: String
     @Binding var updatedLastName: String
     @Binding var updatedEmail: String
-
+    
+    
     var body: some View {
-        Form {
-            Section() {
-                TextField("First Name", text: $updatedFirstName)
-                TextField("Last Name", text: $updatedLastName)
-                TextField("Email", text: $updatedEmail)
-            }
-
-            HStack {
-                Spacer()
-
-                Button("Submit") {
-                    updateContact()
-                    dismiss()
+        NavigationView {
+            Form {
+                Section() {
+                    TextField("First Name", text: $updatedFirstName)
+                    TextField("Last Name", text: $updatedLastName)
+                    TextField("Email", text: $updatedEmail)
                 }
-                Spacer()
             }
+            .navigationBarItems(leading: cancelButton ,trailing: doneButton)
         }
     }
-
+    
+    private var cancelButton: some View {
+        Button {
+            dismiss()
+        } label: {
+            Text("Cancel")
+        }
+    }
+    
+    private var doneButton: some View {
+        Button("Done") {
+            dismiss()
+            updateContact()
+        }
+    }
+    
     private func updateContact() {
         DataController().updateContact(
             contact: contact,

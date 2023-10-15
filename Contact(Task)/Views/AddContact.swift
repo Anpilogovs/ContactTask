@@ -18,6 +18,7 @@ struct AddContact: View {
     @State private var isDoneButtonTapped = false
 
     var body: some View {
+        
         NavigationView {
             Form {
                 Section {
@@ -27,6 +28,8 @@ struct AddContact: View {
                 }
             }
             .navigationBarItems(leading: cancelButton ,trailing: doneButton)
+            .navigationTitle("New Contact")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 

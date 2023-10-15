@@ -30,9 +30,7 @@ struct ContentView: View {
                                 }
                                 Spacer()
                             }
-
-                        }
-                        )
+                        })
                     }
                     .onDelete(perform: deleteContact)
                 }
